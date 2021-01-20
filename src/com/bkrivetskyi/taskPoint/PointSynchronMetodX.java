@@ -5,7 +5,7 @@ public class PointSynchronMetodX {
     private int x;
     private int y;
 
-    public static synchronized void move(PointSynchronMethodX synchronMethodX, int dx, int dy) {
+    public static synchronized void move(PointSynchronMetodX synchronMethodX, int dx, int dy) {
         synchronMethodX.x += dx;
         synchronMethodX.y += dy;
     }
