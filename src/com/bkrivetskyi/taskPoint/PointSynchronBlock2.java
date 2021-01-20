@@ -5,10 +5,10 @@ public class PointSynchronBlock2 {
     private int x;
     private int y;
 
-    public static void move(PointSynchronBlock2 synchBlock2, int dx, int dy) {
+    public static void move(PointSynchronBlock2 synchronBlock2, int dx, int dy) {
         synchronized (lock) {
-            synchBlock2.x += dx;
-            synchBlock2.y += dy;
+            synchronBlock2.x += dx;
+            synchronBlock2.y += dy;
         }
     }
 
