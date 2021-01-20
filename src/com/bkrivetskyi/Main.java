@@ -1,5 +1,7 @@
 package com.bkrivetskyi;
 
+import com.bkrivetskyi.FibonacciTask.FibonacciRunnable;
+import com.bkrivetskyi.FibonacciTask.FibonacciThread;
 import com.bkrivetskyi.taskPoint.*;
 
 import java.util.concurrent.*;
@@ -7,7 +9,10 @@ import java.util.concurrent.*;
 public class Main {
 
     public static void main(String[] args) {
-        new Main().task1();
+       // new Main().task1();
+       // new Main().task2();
+        new Main().task3();
+       // new Main().task4();
     }
 
     public void task1() {
@@ -57,5 +62,44 @@ public class Main {
         executor.shutdown();
     }
 
+    private void task2() {
+        FibonacciThread thread = new FibonacciThread(11);
+        thread.start();
+        try {
+            Thread.sleep(3000);
+            thread.interrupt();
+        } catch (InterruptedException e) {
+            System.out.println("Current thread has been interrupted/cancelled");
+            e.printStackTrace();
+        }
+    }
 
+    private void task3() {
+        FibonacciThread thread = new FibonacciThread(333);
+        ExecutorService executor = Executors.newSingleThreadExecutor();
+        final Future<?> result = executor.submit(thread);
+        try {
+            result.get(3, TimeUnit.SECONDS);
+        } catch (InterruptedException | ExecutionException e) {
+            System.out.println("Current thread has been interrupted/canceled. ");
+            result.cancel(true);
+        } catch (TimeoutException e) {
+            result.cancel(true);
+            System.out.println("Thread has timed out and cancelled");
+        }
+        executor.shutdown();
+    }
+
+    private void task4() {
+        FibonacciRunnable task = new FibonacciRunnable(555);
+        Thread thread = new Thread(task);
+        thread.start();
+        try {
+            Thread.sleep(3000);
+            thread.interrupt();
+        } catch (InterruptedException e) {
+            System.out.println("Current thread has been interrupted/cancelled");
+            e.printStackTrace();
+        }
+    }
 }

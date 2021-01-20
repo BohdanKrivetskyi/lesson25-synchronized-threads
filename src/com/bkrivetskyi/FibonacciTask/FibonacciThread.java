@@ -1,8 +1,9 @@
 package com.bkrivetskyi.FibonacciTask;
 
 import java.math.BigInteger;
+import java.util.concurrent.*;
 
-public class FibonacciThread implements Runnable {
+public class FibonacciThread extends Thread {
 
     private int number;
 
